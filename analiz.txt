@@ -1,0 +1,36 @@
+
+CryptoVote: Blockchain Tabanlı Güvenli Oylama Sistemi Analizi
+1. Proje Vizyonu ve Kapsamı
+
+CryptoVote, geleneksel oylama sistemlerindeki "güven" ihtiyacını matematiksel kanıtlara devreden bir dijital dönüşüm projesidir.
+Projenin temel amacı; insan müdahalesinden arındırılmış, şeffaf ancak seçmen gizliliğini en üst düzeyde koruyan bir altyapı sunmaktır.
+
+2. Teknik Mimari ve Teknoloji Yığınımız (Stack)
+Proje, modüler bir yapıda tasarlanmış olup şu siber güvenlik araçlarını temel alır:
+    Geliştirme Dili: Python 3.13 (Modern ve güvenli kütüphane desteği).
+
+    Arayüz (GUI): Tkinter (Kullanıcı dostu ve hafif arayüz).
+
+    Veri Yönetimi: JSON (Yapılandırılmış ve kriptografik işlemeye uygun veri tabanı).
+
+    Kriptografi Motoru: cryptography kütüphanesi (AES-256 ve RSA-2048 standartları).
+
+3. Siber Güvenlik Stratejileri ve Hedefler
+Projemiz, siber güvenliğin üç temel direği üzerine inşa edilmiştir:
+
+    Veri Bütünlüğü (Integrity): "Hash Zinciri" (Blockchain) mantığıyla, her oy bir önceki oyun SHA-256 özetini taşır. Bu sayede veri tabanında yapılacak tek bitlik bir değişiklik bile tüm zinciri bozarak manipülasyonu anında ifşa eder.
+
+    Gizlilik ve Anonimlik (Confidentiality): Seçmenin kimlik doğrulaması yapıldıktan sonra, kimlik verisi ile oy verisi arasındaki bağ "Matematiksel Maskeleme" ile koparılır. Oylar, Seçim Kurulu'nun Açık Anahtarı (Public Key) ile şifrelenerek "Dijital Zarf" içinde saklanır.
+
+    Yetki Kontrolü (Authentication): Şifrelenmiş oyların deşifre edilmesi ve sayılması, sadece Seçim Kurulu'na ait olan Gizli Anahtar (Private Key) ile mümkündür.
+
+4.                  1. Hafta Mevcut Durum Özeti
+
+Bu hafta itibarıyla projenin Gereksinim Analizi tamamlanmış,
+ Veri Tabanı Şeması (Seçmen ve Sandık tabloları) siber güvenlik standartlarına uygun olarak tasarlanmış ve kullanıcı etkileşiminin başlayacağı
+GUI İskeleti oluşturulmuştur.
+
+
+
+
+
