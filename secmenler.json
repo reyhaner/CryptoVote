@@ -1,10 +1,18 @@
 [
     {
         "tc": "12345678901",
-        "oy_kullandi": false
+        "oy_kullandi": true
     },
     {
         "tc": "98765432109",
         "oy_kullandi": false
+    },
+    {
+        "tc": "12312312312",
+        "oy_kullandi": true
+    },
+    {
+        "tc": "11111111111",
+        "oy_kullandi": true
     }
 ]

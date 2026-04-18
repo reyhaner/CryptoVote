@@ -31,6 +31,39 @@ Bu hafta itibarıyla projenin Gereksinim Analizi tamamlanmış,
 GUI İskeleti oluşturulmuştur.
 
 
+--------------------------------------------------------------------------------------------------------
+                    2. HAFTA: KİMLİK DOĞRULAMA VE TOKEN SİSTEMİ (STAGE 2)
+--------------------------------------------------------------------------------------------------------
+Bu aşamada sistemin "Kimlik Doğrulama" ve "Seçmen Gizliliği" katmanları inşa edilmiştir.
+
+2.1. SHA-256 ile Kimlik Maskeleme:
+- Kişisel verilerin korunması (KVKK) ilkesi gereği, T.C. Kimlik numaraları veritabanında açık metin olarak tutulmaz.
+- Girilen TC numaraları SHA-256 (Secure Hash Algorithm) algoritması ile işlenerek geri döndürülemez bir dijital parmak izine (maskeye) dönüştürülür.
+
+2.2. Kriptografik Token Üretimi:
+- Doğrulanmış her seçmene, oylama oturumu boyunca kullanacağı benzersiz bir 'Token' atanır.
+- Bu işlem için Python'un 'secrets' kütüphanesi kullanılarak yüksek entropili, rastgele anahtarlar üretilmiştir.
+
+2.3. Mükerrer Oy (Double Voting) Engelleme:
+- Veritabanındaki 'oy_kullandi' bayrağı (flag) kontrol edilerek, bir seçmenin aynı kimlik bilgisiyle birden fazla kez sisteme girişi 
+ve oy kullanması teknik olarak engellenmiştir.
 
 
 
+--------------------------------------------------------------------------------------------------------
+                    3. HAFTA: VERİ GİZLİLİĞİ VE AES-256 ŞİFRELEME (STAGE 3)
+--------------------------------------------------------------------------------------------------------
+Bu aşamada projenin "Gizlilik" (Confidentiality) katmanı, askerî düzeyde simetrik şifreleme standartları entegre edilerek en üst seviyeye çıkarılmıştır.
+
+3.1. AES-256 (Advanced Encryption Standard) Entegrasyonu:
+- Oylama sonuçlarının veri tabanında (sandik.json) açık metin (Plaintext) olarak tutulması büyük bir güvenlik riskidir. Bu riski bertaraf etmek amacıyla, dünya genelinde devlet sırlarını korumak için kullanılan AES-256 (Fernet) şifreleme mimarisi sisteme dahil edilmiştir.
+
+3.2. Simetrik Şifreleme ve Anahtar Yönetimi (Key Management):
+- Şifreleme ve deşifreleme işlemleri için 'gizli.key' adı verilen, 256-bit uzunluğunda simetrik bir anahtar yapısı kurgulanmıştır.
+- Anahtarın güvenliği "Dosya Tabanlı Anahtar Saklama" yöntemiyle sağlanmış; anahtar dosyası olmadan veri tabanındaki şifreli metinlerin (Ciphertext) çözülmesi matematiksel olarak imkansız hale getirilmiştir.
+
+3.3. Veri Güvenliği Senaryosu (At-Rest Encryption):
+- Bu katman sayesinde "Durağan Veri Şifrelemesi" sağlanmıştır. Veri tabanı dosyası (sandik.json) bir saldırgan tarafından ele geçirilse dahi, şifreleme motoru ve ilgili anahtar olmadan içerideki oyların hangi adaya ait olduğu tespit edilemez.
+
+3.4. Uygulanan Kriptografik İşlem Akışı:
+   Seçim (Plaintext) --> AES-256 Motoru + gizli.key --> Şifreli Veri (Ciphertext) --> sandik.json
